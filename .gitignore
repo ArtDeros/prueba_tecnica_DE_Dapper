@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Airflow
+logs/
+*.log
+airflow.db
+airflow.cfg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Docker
+.env
+.env.local
+
+# Jupyter Notebooks
+*.ipynb_checkpoints
+
+# Temporal
+*.tmp
+*.bak
+

@@ -1,0 +1,77 @@
+# Reglas de validación para los campos extraídos
+# Si un campo no cumple, se deja NULL/vacío
+# Si un campo obligatorio no cumple, se descarta la fila completa
+
+fields:
+  # Campos obligatorios (si no cumplen, se descarta la fila)
+  required_fields:
+    - title
+    - created_at
+    - entity
+    - external_link
+
+  # Reglas de validación por campo
+  title:
+    type: str
+    required: true
+    max_length: 65
+    regex: '^[^"]*$'  # No debe contener comillas dobles
+    description: "Título de la norma, máximo 65 caracteres, sin comillas"
+
+  created_at:
+    type: str
+    required: true
+    regex: '^\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}:\d{2})?$'  # Formato YYYY-MM-DD o YYYY-MM-DD HH:MM:SS
+    description: "Fecha de creación en formato ISO (YYYY-MM-DD o YYYY-MM-DD HH:MM:SS)"
+
+  update_at:
+    type: str
+    required: false
+    regex: '^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}$'  # Formato YYYY-MM-DD HH:MM:SS
+    description: "Fecha de actualización en formato YYYY-MM-DD HH:MM:SS"
+
+  is_active:
+    type: bool
+    required: false
+    default: true
+    description: "Indica si el registro está activo"
+
+  entity:
+    type: str
+    required: true
+    regex: '^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$'  # Solo letras y espacios
+    description: "Nombre de la entidad, solo letras y espacios"
+
+  external_link:
+    type: str
+    required: true
+    regex: '^https?://[^\s]+$'  # URL válida
+    description: "Enlace externo válido (http o https)"
+
+  gtype:
+    type: str
+    required: false
+    allowed_values: ['link', None]
+    description: "Tipo de documento, debe ser 'link' o NULL"
+
+  rtype_id:
+    type: int
+    required: false
+    min_value: 1
+    max_value: 100
+    description: "ID del tipo de resolución, entre 1 y 100"
+
+  summary:
+    type: str
+    required: false
+    max_length: 1000
+    regex: '^[^"]*$'  # No debe contener comillas dobles
+    description: "Resumen de la norma, máximo 1000 caracteres, sin comillas"
+
+  classification_id:
+    type: int
+    required: false
+    min_value: 1
+    max_value: 100
+    description: "ID de clasificación, entre 1 y 100"
+
